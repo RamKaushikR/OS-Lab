@@ -1,0 +1,228 @@
+﻿
+Script started on 2019-02-06 19:06:06+0530
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ cat run.sh
+a=$1
+echo "Program:"
+cat $a.c
+echo "Compile: gcc $a.c -o $a -w"
+gcc $a.c -o $a -w
+echo "Output:"
+./$a
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ sh run.sh 1
+Program:
+#include<stdio.h>
+#include<unistd.h>
+void main(){
+  fork();
+  printf("Hello world\n");
+}
+Compile: gcc 1.c -o 1 -w
+Output:
+Hello world
+Hello world
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ sh run.sh 2
+Program:
+#include<stdio.h>
+#include<unistd.h>
+void main(){
+  printf("Before fork\n");
+  fork();
+  printf("Hello world\n");
+}
+Compile: gcc 2.c -o 2 -w
+Output:
+Before fork
+Hello world
+Hello world
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ sh run.sh 3
+Program:
+#include<stdio.h>
+#include<unistd.h>
+void main(){
+  pid_t pro_id;
+  printf("Before fork\n");
+  pro_id = fork();
+  if(pro_id == 0) // Child process 
+    printf("Hello world from child\n");
+  else if(pro_id > 0) // parent process
+    printf("Hello world from parent\n");
+  else
+    printf("Fork failure\n");
+}
+Compile: gcc 3.c -o 3 -w
+Output:
+Before fork
+Hello world from parent
+Hello world from child
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ sh run.sh 4
+Program:
+
+
+#include<stdio.h>
+#include<unistd.h>
+void main(){
+  pid_t pro_id;
+  printf("Before fork\n");
+  pro_id = fork();
+  if(pro_id == 0){ // Child process
+    for(int i = 0; i < 10; i++)
+      printf("Hello world from child\n");
+  }
+  else if(pro_id > 0){ // parent process{
+    for(int i = 0; i < 10; i++)
+      printf("Hello world from parent\n");
+  }
+  else
+    printf("Fork failure\n");
+}
+Compile: gcc 4.c -o 4 -w
+Output:
+Before fork
+Hello world from parent
+Hello world from parent
+Hello world from parent
+Hello world from parent
+Hello world from parent
+Hello world from parent
+Hello world from parent
+Hello world from parent
+Hello world from parent
+Hello world from parent
+Hello world from child
+Hello world from child
+Hello world from child
+Hello world from child
+Hello world from child
+Hello world from child
+Hello world from child
+Hello world from child
+Hello world from child
+Hello world from child
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ sh run.sh 5
+Program:
+#include<stdio.h>
+#include<unistd.h>
+void main(){
+  pid_t pro_id;
+  pro_id = fork();
+  if(pro_id == 0)
+    printf("Child ID: %d Parent ID: %d \n",getpid(),getppid());
+  else if(pro_id > 0)
+    printf("Parent ID: %d Parent's Parent ID: %d \n",getpid(),getppid());
+  else
+    printf("Fork failure\n");
+}
+Compile: gcc 5.c -o 5 -w
+Output:
+Parent ID: 3117 Parent's Parent ID: 3110 
+Child ID: 3118 Parent ID: 3117 
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ sh run.sh 6
+Program:
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<sys/wait.h>
+void main(){
+  pid_t p;
+  p = fork();
+  if(p == 0){
+    sleep(2);
+    printf("Hello after 2s!\n");
+  }
+  else if(p > 0){
+    printf("Hello!\n");
+    wait(NULL);
+    printf("Child over, now exit.\n");
+    exit(0);
+  }
+}
+Compile: gcc 6.c -o 6 -w
+Output:
+Hello!
+Hello after 2s!
+Child over, now exit.
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ sh run.sh 7
+Program:
+#include<stdio.h>
+#include<unistd.h>
+void main(){
+  pid_t pro_id;
+  printf("Before fork\n");
+  pro_id = fork();
+  if(pro_id == 0){ // Child process
+    execl("/bin/ls","ls",NULL);
+    printf("Hello world from child\n");
+  }
+  else if(pro_id > 0){ // parent process
+    printf("Hello world from parent\n");
+  }
+  else
+    printf("Fork failure\n");
+}
+Compile: gcc 7.c -o 7 -w
+Output:
+Before fork
+Hello world from parent
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ 1    2	  3    4    5	 6    7    8	9    Record.odt
+1.c  2.c  3.c  4.c  5.c  6.c  7.c  8.c	9.c  run.sh
+
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ sh run.sh 8
+Program:
+#include<stdio.h>
+#include<stdlib.h>
+#include<dirent.h>
+struct dirent *d;
+int main(int argc, char *argv[]){
+  char buff[100] = "../Ex5";
+  DIR *dirp;
+  if((dirp=opendir(buff))==NULL){
+
+
+    printf("The given directory does not exist");
+    exit(1);
+  }
+  while((d=readdir(dirp))){
+    printf("%s\n",d->d_name);
+  }
+  closedir(dirp);
+}
+Compile: gcc 8.c -o 8 -w
+Output:
+..
+npsjf.c
+fcfs.c
+fcfs
+.
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ sh run.sh 9
+Program:
+#include<stdio.h>
+#include<fcntl.h>
+#include<stdlib.h>
+#include<sys/types.h>
+#include<sys/stat.h>
+int main(int argc, char* argv[]){
+  int fd;
+  char buf[100];
+  int i = 1;
+  if((fd = open("file1.txt", O_WRONLY | O_CREAT, 00666))==-1){
+    printf("Cannot create\n");
+    exit(1);
+  }
+  write(fd,"Hello world",11);
+  int fd1 = open("file1.txt", O_RDONLY, 0);
+  read(fd1,buf,11);
+  printf("%s\n",buf);
+  close(fd);
+  close(fd1);
+}
+Compile: gcc 9.c -o 9 -w
+Output:
+Hello world
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ cat file1.txt
+Hello world
+#]0;ram@ram-kaushik: ~/OSLab/Ex1b##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1b#[00m$ exit
+exit
+
+Script done on 2019-02-06 19:07:01+0530

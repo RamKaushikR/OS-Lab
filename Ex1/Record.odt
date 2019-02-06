@@ -1,0 +1,111 @@
+﻿
+Script started on 2019-02-06 19:29:25+0530
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ cp file1.txt file2.txt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ ls
+file1.txt  file2.txt  Record.odt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ cat file1.txt
+Exercise 1a
+Study of system calls
+and system commands
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ cat file2.txt
+Exercise 1a
+Study of system calls
+and system commands
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ mv file2.txt file3.txt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ ls
+file1.txt  file3.txt  Record.odt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ cat file3.txt
+Exercise 1a
+Study of system calls
+and system commands
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ ls -a
+#[0m#[01;34m.#[0m  #[01;34m..#[0m  file1.txt  file3.txt  Record.odt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ ls -l
+total 8
+-rw-r--r-- 1 ram ram 54 Feb  6 19:29 file1.txt
+-rw-r--r-- 1 ram ram 54 Feb  6 19:29 file3.txt
+-rw-r--r-- 1 ram ram  0 Feb  6 19:29 Record.odt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ ls -1
+file1.txt
+file3.txt
+Record.odt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ ls -R
+.:
+file1.txt  file3.txt  Record.odt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ grep 1a file1.txt
+Exercise #[01;31m#[K1a#[m#[K
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ grep -n 1a file1.txt
+#[32m#[K1#[m#[K#[36m#[K:#[m#[KExercise #[01;31m#[K1a#[m#[K
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ grep -c 1a file1.txt
+1
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ grep -L 1a file1.txt file3.txt Record.odt
+#[35m#[KRecord.odt#[m#[K
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ grep -l 1a file1.txt
+#[35m#[Kfile1.txt#[m#[K
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ chmod +x file3.txt
+
+
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ ls
+file1.txt  #[0m#[01;32mfile3.txt#[0m  Record.odt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ ls -l
+total 8
+-rw-r--r-- 1 ram ram 54 Feb  6 19:29 file1.txt
+-rwxr-xr-x 1 ram ram 54 Feb  6 19:29 #[0m#[01;32mfile3.txt#[0m
+-rw-r--r-- 1 ram ram  0 Feb  6 19:29 Record.odt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ cat > file.txt
+Hello
+^Z
+[1]+  Stopped                 cat > file1.txt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ cat file1.txt
+Hello
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ cat >> file1.txt
+Next
+^Z
+[3]+  Stopped                 cat >> file1.txt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ cat file1.txt
+Hello
+Next
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ mkdir file
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ ls
+#[0m#[01;34mfile#[0m  file1.txt  #[01;32mfile3.txt#[0m  Record.odt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ rm file
+rm: cannot remove 'file': Is a directory
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ rm -r file
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ ls
+file1.txt  #[0m#[01;32mfile3.txt#[0m  Record.odt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ wc file1.txt
+ 2  2 11 file1.txt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ wc -c file1.txt
+11 file1.txt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ wc -l file1.txt
+2 file1.txt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ wc -m file1.txt
+11 file1.txt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ wc -w file1.txt
+2 file1.txt
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ who -b
+         system boot  2019-02-07 00:02
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ who -l
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ who -d
+
+
+
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ who -u
+ram      tty2         2019-02-07 00:03  old         1117 (/dev/tty2)
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ echo hello|wc
+      1       1       6
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ head -1 file1.txt
+Hello
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ tail -1 file1.txt
+Next
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ nl file1.txt
+     1	Hello
+     2	Next
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ awk '/a/{print}' file3.txt
+Exercise 1a
+Study of system calls
+and system commands
+#]0;ram@ram-kaushik: ~/OSLab/Ex1a##[01;32mram@ram-kaushik#[00m:#[01;34m~/OSLab/Ex1a#[00m$ exit
+exit
+
+Script done on 2019-02-06 19:35:33+0530
