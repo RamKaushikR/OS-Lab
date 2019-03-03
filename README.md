@@ -9,6 +9,6 @@ Ex4: Shell Programming
 
 Ex5: FCFS, SJF, RR scheduling
 
-Ex6(7): Inter-process communication
+Ex6: Inter-process communication
 
-Ex7(6): Semaphores
+Ex7: Semaphores
