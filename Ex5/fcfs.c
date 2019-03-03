@@ -46,7 +46,9 @@ void fcfs(){
     avgwt += p[i].wt; avgtat += p[i].tat; avgrt += p[i].rt;
   }
   printf("\nFCFS Scheduling:\nPID \t AT \t BT \t ST \t FT \t WT \t TAT \t RT\n");
-  avgwt/=N; avgtat/=N; avgrt/=N;
+  avgwt/=N;
+  avgtat/=N;
+  avgrt/=N;
   for(int i = 0; i < N; i++){
     printf("P %d \t %.2f \t %.2f \t %.2f \t %.2f \t %.2f \t %.2f \t %.2f", p[i].id, p[i].at, p[i].bt, p[i].st, p[i].ft, p[i].wt, p[i].tat, p[i].rt);
     printf("\n");
