@@ -14,7 +14,8 @@ void line(int n){
 }
 void input(){
   printf("No. of processes: ");
-  while(N == 0) scanf("%d", &N);
+  while(N == 0)
+    scanf("%d", &N);
   for(int i = 0; i < N; i++){
     printf("Enter AT and BT of P%d: ", i+1);
     scanf("%f %f", &(p[i].at), &(p[i].bt));
@@ -95,14 +96,14 @@ void rr(){
 	    qu[i].rt = pe[tot].rt;
 	  V[i] = 1;
 	  if(qu[i].bt <= 0){
-	    V[i] = -1;
+	    V[i] = -1; 
 	    c--;
 	  }
 	}
 	tot++; t+= ts; cc = 1;
       }
       for(int i = qn; i < N; i++){
-	if(p[i].at <= t) {
+	if(p[i].at <= t){
 	  qu[qn] = p[i];
 	  qn++;
 	}
@@ -122,7 +123,19 @@ void rr(){
   }
   avgwt/=N; avgtat/=N; avgrt/=N;
   for(int i = 0; i < tot; i++){
-    printf("P %d \t %.2f \t %.2f \t %.2f \t %.2f \t %.2f \t %.2f \t %.2f", pe[i].id, pe[i].at, pe[i].bt, pe[i].st, pe[i].ft, pe[i].wt, pe[i].tat, pe[i].rt);
+    printf("P %d \t %.2f \t %.2f \t %.2f \t %.2f \t ", pe[i].id, pe[i].at, pe[i].bt, pe[i].st, pe[i].ft);
+    if(pe[i].wt < 0)
+      printf("-- \t ");
+    else
+      printf("%.2f \t ",pe[i].wt);
+    if(pe[i].tat < 0)
+      printf("-- \t ");
+    else
+      printf("%.2f \t ",pe[i].tat);
+    if(pe[i].rt < 0)
+      printf("-- \t ");
+    else
+      printf("%.2f \t ",pe[i].rt);
     printf("\n");
   }
   printf("Average: WT = %3.2f TAT = %3.2f RT = %3.2f\n\n", avgwt, avgtat, avgrt);
@@ -132,17 +145,18 @@ void rr(){
     if(i==1){
       for(int j = 0; j < tot; j++)
 	printf("|    P%d    ", pe[j].id);
-      printf("|"); }
+      printf("|");
+    }
     else{
       for(int j = 0; j < tot; j++)
 	printf("|          ");
-      printf("|"); }
+      printf("|");
+    }
     printf("\n");
   }
   line(tot);
-  for(int i = 0; i < tot; i++){
+  for(int i = 0; i < tot; i++)
     printf("%.1f     %.1f ",pe[i].st,pe[i].ft);
-  }
   printf("\n");
 }
 int main(){
