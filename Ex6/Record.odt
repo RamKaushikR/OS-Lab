@@ -1,0 +1,175 @@
+﻿
+Script started on 2019-03-04 16:33:21+0530
+#]0;ramkaushik@ram-kaushik: ~/Documents/College/OS-Lab/Ex6##[01;32mramkaushik@ram-kaushik#[00m:#[01;34m~/Documents/College/OS-Lab/Ex6#[00m$ cat p1.c
+#include <sys/ipc.h>
+#define NULL 0
+#include <sys/shm.h>
+#include <sys/types.h>
+#include<unistd.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<sys/wait.h>
+#include<stdio_ext.h>
+int main(){
+  int pid;
+  char *a,*b,c;
+  int id,n,i;
+  id=shmget(111,50,IPC_CREAT | 00666);
+  pid=fork();
+  if(pid>0){//parent
+    // id=shmget(111,50,IPC_CREAT | 00666);
+    a=shmat(id,NULL,0);
+    scanf("%s",a);
+    wait(NULL);
+    printf("\nparent %s\n",a);
+    shmdt(a);
+  }
+  else{ //child
+    sleep(3);
+    //id=shmget(111,50,0);
+    b=shmat(id,NULL,0);
+    b[0] = toupper(b[0]);
+    printf("\nchild %s\n",b);
+    shmdt(b);
+  }
+  shmctl(id, IPC_RMID,NULL);
+}
+
+
+
+
+#]0;ramkaushik@ram-kaushik: ~/Documents/College/OS-Lab/Ex6##[01;32mramkaushik@ram-kaushik#[00m:#[01;34m~/Documents/College/OS-Lab/Ex6#[00m$ cat p2_server.c
+#include <sys/ipc.h>
+#define NULL 0
+#include <sys/shm.h>
+
+
+#include <sys/types.h>
+#include<unistd.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<sys/wait.h>
+#include<stdio_ext.h>
+int main(){
+  int pid;
+  char *a,*b,c;
+  int id,n,i;
+  id=shmget(111,50,IPC_CREAT | 00666);
+  a=shmat(id,NULL,0);
+  scanf("%s",a);
+  wait(NULL);
+  shmdt(a);
+  //shmctl(id, IPC_RMID,NULL);
+}
+
+#]0;ramkaushik@ram-kaushik: ~/Documents/College/OS-Lab/Ex6##[01;32mramkaushik@ram-kaushik#[00m:#[01;34m~/Documents/College/OS-Lab/Ex6#[00m$ cat p2_client.c
+#include <sys/ipc.h>
+#define NULL 0
+#include <sys/shm.h>
+#include <sys/types.h>
+#include<unistd.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<sys/wait.h>
+#include<stdio_ext.h>
+int main(){
+  int pid;
+  char *a,*b,c;
+  int id,n,i;
+  id=shmget(111,50,00666);
+  sleep(3);
+  //id=shmget(111,50,0);
+  b=shmat(id,NULL,0);
+  b[0] = toupper(b[0]);
+  printf("\nchild %s\n",b);
+  shmdt(b);
+  shmctl(id, IPC_RMID,NULL);
+}
+
+
+
+
+
+
+
+
+
+
+#]0;ramkaushik@ram-kaushik: ~/Documents/College/OS-Lab/Ex6##[01;32mramkaushik@ram-kaushik#[00m:#[01;34m~/Documents/College/OS-Lab/Ex6#[00m$ cat p3_client.c
+#include<sys/ipc.h>
+#define NULL 0
+#include<sys/shm.h>
+#include<sys/types.h>
+#include<unistd.h>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<sys/wait.h>
+int main(){
+  char *a;
+  int id = shmget(115, 50, IPC_CREAT | 00666);
+  a = shmat(id, NULL, 0);
+  while(1){
+    a[0] = '\0';
+    printf("You: ");
+    scanf("%s", a);
+    if(a[0] == '*')
+      break;
+    sleep(1);
+    while(a[0] == '\0');
+    printf("Server: %s\n", a);
+    if(a[0] == '*')
+      break;
+  }
+  printf("Connection Ended!\n");
+  shmdt(a);
+  shmctl(id, IPC_RMID, NULL);
+}
+
+#]0;ramkaushik@ram-kaushik: ~/Documents/College/OS-Lab/Ex6##[01;32mramkaushik@ram-kaushik#[00m:#[01;34m~/Documents/College/OS-Lab/Ex6#[00m$ cat p3_server.c
+#include<sys/ipc.h>
+#define NULL 0
+#include<sys/shm.h>
+#include<sys/types.h>
+#include<unistd.h>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<sys/wait.h>
+int main(){
+
+
+  char *a;
+  int id = shmget(115, 50, IPC_CREAT | 00666);
+  a = shmat(id, NULL, 0);
+  while(1){
+    while(a[0] == '\0');
+    printf("Client: %s\n", a);
+    if(a[0] == '*')
+      break;
+    a[0] = '\0';
+    printf("You: ");
+    scanf("%s", a);
+    if(a[0] == '*')
+      break;
+    sleep(1);
+  }
+  printf("Connection Ended!\n");
+  shmdt(a);
+  shmctl(id, IPC_RMID, NULL);
+}
+#]0;ramkaushik@ram-kaushik: ~/Documents/College/OS-Lab/Ex6##[01;32mramkaushik@ram-kaushik#[00m:#[01;34m~/Documents/College/OS-Lab/Ex6#[00m$ exit
+exit
+
+Script done on 2019-03-04 16:33:56+0530
+
+
+
+
+
+
+
+
